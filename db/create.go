@@ -19,7 +19,7 @@ func CreateDiscount() uint64 {
 		DB.Model(&DiscountCode{}).Where("Code = ?", code).Count(&count)
 
 		/*------------ create code if it not exists ------------*/
-		if !(count == 0) {
+		if count == 0 {
 			res := DB.Create(&discountcode)
 			if res.Error != nil {
 				fmt.Println("Error creating discount code!")

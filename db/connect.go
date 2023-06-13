@@ -12,7 +12,8 @@ var DB *gorm.DB
 
 func Connect() {
 	/*------------ connect ------------*/
-	DB, err := gorm.Open(sqlite.Open("discounts.db"), &gorm.Config{})
+	var err error
+	DB, err = gorm.Open(sqlite.Open("discounts.db"), &gorm.Config{})
 
 	if err != nil {
 		fmt.Println("Couldn't connect to database!")
