@@ -63,7 +63,24 @@ func Inval(code uint64) string {
 		DB.Model(&DiscountCode{}).Where("Code = ?", code).First(&discountcode)
 		discountcode.Valid = false
 		DB.Model(&DiscountCode{}).Where("Code = ?", code).Save(&discountcode)
-		return "invalidated"
+		return "invalid"
+	} else {
+		return "not found"
+	}
+}
+
+func Reset(code uint64) string {
+	/*------------ invalidate code ------------*/
+	/*------------ check if it exists ------------*/
+	var count int64
+	DB.Model(&DiscountCode{}).Where("Code = ?", code).Count(&count)
+	if count == 1 {
+		/*------------ invalidate it ------------*/
+		var discountcode DiscountCode
+		DB.Model(&DiscountCode{}).Where("Code = ?", code).First(&discountcode)
+		discountcode.Valid = true
+		DB.Model(&DiscountCode{}).Where("Code = ?", code).Save(&discountcode)
+		return "valid"
 	} else {
 		return "not found"
 	}

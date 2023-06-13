@@ -14,13 +14,13 @@ func main() {
 	router := gin.Default()
 
 	/*------------ static stuff ------------*/
-	router.Static("/index.html", "./static/index.html")
-	router.Static("/static/", "./static")
+	router.Static("/app/", "./static")
 
 	/*------------ api stuff ------------*/
 	router.GET("/new-code", routes.NewCode)
-	router.GET("/check-code", routes.CheckCode)
-	router.GET("/inval-code", routes.InvalCode)
+	router.POST("/check-code", routes.CheckCode)
+	router.POST("/inval-code", routes.InvalCode)
+	router.POST("/reset-code", routes.ResetCode)
 
 	/*------------ start gin ------------*/
 	router.Run()
