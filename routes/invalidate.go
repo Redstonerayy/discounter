@@ -7,19 +7,19 @@ import (
 	"github.com/redstonerayy/discounter/db"
 )
 
-/*------------ check if code is valid, invalid or non existend ------------*/
-func CheckCode(c *gin.Context) {
+/*------------ invalidate code if existend ------------*/
+func InvalCode(c *gin.Context) {
 	/*------------ parse client request ------------*/
 	var codeinfo CodeInfo
 	if err := c.BindJSON(&codeinfo); err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 	}
 
-	/*------------ check ------------*/
-	codestatus := db.Check(codeinfo.Code)
+	/*------------ invalidate ------------*/
+	status := db.Inval(codeinfo.Code)
 
 	/*------------ return status of code ------------*/
 	c.JSON(http.StatusOK, gin.H{
-		"codestatus": codestatus,
+		"codestatus": status,
 	})
 }

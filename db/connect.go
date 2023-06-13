@@ -8,10 +8,12 @@ import (
 	"gorm.io/gorm"
 )
 
+/*------------ global database connection ------------*/
 var DB *gorm.DB
 
 func Connect() {
 	/*------------ connect ------------*/
+	/*------------ sqlite will create a new database if not existend ------------*/
 	var err error
 	DB, err = gorm.Open(sqlite.Open("discounts.db"), &gorm.Config{})
 
@@ -20,6 +22,7 @@ func Connect() {
 		os.Exit(1)
 	}
 
+	/*------------ in case of updates, probably not needed ------------*/
 	err = DB.AutoMigrate(
 		&DiscountCode{},
 	)

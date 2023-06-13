@@ -15,11 +15,12 @@ func main() {
 
 	/*------------ static stuff ------------*/
 	router.Static("/index.html", "./static/index.html")
-	router.Static("/static", "./static")
+	router.Static("/static/", "./static")
 
 	/*------------ api stuff ------------*/
 	router.GET("/new-code", routes.NewCode)
 	router.GET("/check-code", routes.CheckCode)
+	router.GET("/inval-code", routes.InvalCode)
 
 	/*------------ start gin ------------*/
 	router.Run()

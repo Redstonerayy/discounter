@@ -1,14 +1,10 @@
 package codes
 
 import (
-	"fmt"
 	"math/rand"
 )
 
+/*------------ generate number with maximum 16 non-zero digits------------*/
 func GenCode() uint64 {
-	a := rand.Int63n(1e16)
-	fmt.Println(a)
-	s := uint64(a)
-	fmt.Println(s)
-	return s
+	return uint64(rand.Int63n(1e16))
 }

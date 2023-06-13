@@ -1,20 +1,19 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/redstonerayy/discounter/db"
 )
 
+/*------------ create new code ------------*/
 func NewCode(c *gin.Context) {
-	code := db.CreateDiscount()
+	/*------------ create ------------*/
+	code := db.Create()
 
-	fmt.Println(code)
-
+	/*------------ return code to client ------------*/
 	c.JSON(http.StatusOK, gin.H{
-		"message": "new",
-		"code":    code,
+		"newcode": code,
 	})
 }
