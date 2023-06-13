@@ -1,13 +1,14 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/redstonerayy/discounter/db"
+	"github.com/redstonerayy/discounter/routes"
 )
 
 func main() {
 	/*------------ connect to database ------------*/
+	db.Connect()
 
 	/*------------ initialize gin and http routes ------------*/
 	router := gin.Default()
@@ -16,18 +17,10 @@ func main() {
 	router.Static("/index.html", "./static/index.html")
 	router.Static("/static", "./static")
 
-	/*------------ api ------------*/
-	router.GET("/new-code", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	/*------------ api stuff ------------*/
+	router.GET("/new-code", routes.NewCode)
+	router.GET("/check-code", routes.CheckCode)
 
-	router.GET("/check-code", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
-
+	/*------------ start gin ------------*/
 	router.Run()
 }
