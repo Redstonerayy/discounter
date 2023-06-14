@@ -3,8 +3,9 @@ const copy = document.querySelector(".new-code > img");
 const bnew = document.querySelector(".b-new");
 
 const codeinput = document.querySelector(".input-field");
+const result = document.querySelector(".check-inval-reset-result");
 const bcheck = document.querySelector(".b-check");
-const bredeem = document.querySelector(".b-inval");
+const binval = document.querySelector(".b-inval");
 const breset = document.querySelector(".b-reset");
 
 copy.addEventListener("click", () => {
@@ -27,10 +28,17 @@ bcheck.addEventListener("click", async () => {
 	});
 
 	const json = await response.json();
-	console.log(json);
+
+	if(json.codestatus == "not found"){
+		result.textContent = "Code not found!"
+	} else if (json.codestatus == "valid"){
+		result.textContent = "Code is valid!"
+	} else if (json.codestatus == "invalid"){
+		result.textContent = "Code is invalid!"
+	}
 });
 
-bredeem.addEventListener("click", async () => {
+binval.addEventListener("click", async () => {
 	const response = await fetch("/inval-code", {
 		method: "POST",
 		headers: {
@@ -40,7 +48,12 @@ bredeem.addEventListener("click", async () => {
 	});
 
 	const json = await response.json();
-	console.log(json);
+	
+	if(json.codestatus == "not found"){
+		result.textContent = "Code not found!"
+	} else if (json.codestatus == "invalid"){
+		result.textContent = "Code is now invalid!"
+	}
 });
 
 breset.addEventListener("click", async () => {
@@ -53,5 +66,10 @@ breset.addEventListener("click", async () => {
 	});
 
 	const json = await response.json();
-	console.log(json);
+	
+	if(json.codestatus == "not found"){
+		result.textContent = "Code not found!"
+	} else if (json.codestatus == "valid"){
+		result.textContent = "Code is now valid again!"
+	}
 });

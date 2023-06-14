@@ -25,6 +25,13 @@
 }
 
 /*------------ new code ------------*/
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
 .new-code {
 	display: flex;
 	justify-content: center;
@@ -57,7 +64,7 @@
 .check-inval-reset-code {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	flex-direction: column;
 }
 
@@ -83,4 +90,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.check-inval-reset-result {
+	margin: 10px;
 }
