@@ -11,7 +11,9 @@ func main() {
 	db.Connect()
 
 	/*------------ initialize gin and http routes ------------*/
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
+	router.SetTrustedProxies(nil)
 
 	/*------------ static stuff ------------*/
 	router.Static("/app/", "./static")
@@ -23,5 +25,5 @@ func main() {
 	router.POST("/reset-code", routes.ResetCode)
 
 	/*------------ start gin ------------*/
-	router.Run()
+	router.Run("127.0.0.1:8080")
 }
